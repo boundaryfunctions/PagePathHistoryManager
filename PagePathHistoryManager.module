@@ -71,7 +71,7 @@ class PagePathHistoryManager extends WireData implements Module
         foreach ($implementingModules as $moduleName) {
             if ($this->modules->isInstalled($moduleName)) {
                 $active = true;
-                $this->dbTableName = constant($moduleName . '::dbTableName');
+                $this->dbTableName = $this->wire('modules')->getModule($moduleName)::dbTableName;
                 break;
             }
         }
