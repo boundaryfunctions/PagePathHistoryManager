@@ -1,4 +1,4 @@
-<?php
+<?php namespace ProcessWire;
 
 /**
  * Page Path History Manager Module
@@ -187,7 +187,7 @@ class PagePathHistoryManager extends WireData implements Module
 
         $paths = array();
         if (0 < $query->rowCount()) {
-            while ($path = $query->fetch(PDO::FETCH_ASSOC)) {
+            while ($path = $query->fetch(\PDO::FETCH_ASSOC)) {
                 $path['pageId'] = $page;
                 $paths[] = $path;
             }
@@ -221,7 +221,7 @@ class PagePathHistoryManager extends WireData implements Module
         $db = $this->wire('database');
         $query = $db->prepare("INSERT INTO {$this->dbTableName} SET path=:path, pages_id=:pages_id, created=NOW()");
         $query->bindValue(":path", $path);
-        $query->bindValue(":pages_id", $page, PDO::PARAM_INT);
+        $query->bindValue(":pages_id", $page, \PDO::PARAM_INT);
         $query->execute();
         if (0 < $query->rowCount()) {
             $success = true;
